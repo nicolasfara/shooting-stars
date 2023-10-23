@@ -1,5 +1,7 @@
 import gleam/io
-import shooting_stars/game.{Continue, Game, Lose, Win}
+import shooting_stars/game.{
+  Continue, Game, GameError, Lose, NotAStar, OutOfRange, Win,
+}
 import gleam/erlang
 import gleam/int
 import gleam/string
@@ -9,6 +11,13 @@ pub fn main() {
   main_loop(game.new())
 }
 
+fn game_error_to_string(error: GameError) -> String {
+  case error {
+    OutOfRange -> "Move out of range"
+    NotAStar -> "Not a star"
+  }
+}
+
 fn main_loop(game: Game) {
   io.println(game.to_string(game))
 
@@ -16,7 +25,10 @@ fn main_loop(game: Game) {
   let col = ask_int("Insert col: ")
 
   case game.explode(game, row, col) {
-    Error(_) -> main_loop(game)
+    Error(err) -> {
+      io.println(game_error_to_string(err))
+      main_loop(game)
+    }
     Ok(#(outcome, new_game)) ->
       case outcome {
         Win -> io.println("Win!\n" <> game.to_string(new_game))
