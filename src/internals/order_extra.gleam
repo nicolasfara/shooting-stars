@@ -1,4 +1,4 @@
-import gleam/order.{Eq, Gt, Lt, Order}
+import gleam/order.{type Order, Eq, Gt, Lt}
 
 pub fn break_tie(order: Order, other: fn() -> Order) -> Order {
   case order {

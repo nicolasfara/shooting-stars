@@ -15,9 +15,29 @@ jobs:
       - uses: erlef/setup-beam@v1
         with:
           otp-version: "26.0.2"
-          gleam-version: "0.31.0"
+          gleam-version: "0.32.4"
           rebar3-version: "3"
           # elixir-version: "1.15.4"
       - run: gleam format --check src test
       - run: gleam deps download
       - run: gleam test
+
+  deploy:
+   runs-on: ubuntu-latest
+   needs: [ test ]
+   steps:
+    - uses: actions/checkout@v3
+    - uses: erlef/setup-beam@v1
+      with:
+        otp-version: "26.0.2"
+        gleam-version: "0.32.4"
+        rebar3-version: "3"
+        # elixir-version: "1.15.4"
+    - run: gleam build
+    - run: mkdir site && mkdir site/build
+    - run: cp index.html site
+    - run: cp -r build/dev site/build
+    - uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./site

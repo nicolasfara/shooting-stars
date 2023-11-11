@@ -1,4 +1,4 @@
-import internals/grid.{Grid}
+import internals/grid.{type Grid}
 import gleam/bool
 import gleam/result
 import gleam/list

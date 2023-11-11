@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shooting Stars</title>
+
+    <script type="module">
+        import { main } from "./build/dev/javascript/shooting_stars/shooting_stars.mjs";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            main();
+        });
+    </script>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 3em);
+            grid-template-rows: repeat(3, 3em);
+        }
+
+        .grid div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 3em;
+        }
+    </style>
+</head>
+
+<body>
+    <div data-lustre-app></div>
+</body>
+
+</html>

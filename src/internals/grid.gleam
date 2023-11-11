@@ -1,9 +1,9 @@
-import gleam/map.{Map}
+import gleam/map.{type Map}
 import gleam/list
 import gleam/result
 import gleam/int
 import gleam/pair
-import gleam/order.{Order}
+import gleam/order.{type Order}
 import internals/order_extra
 import internals/list_extra
 
